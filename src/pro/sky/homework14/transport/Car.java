@@ -3,7 +3,7 @@ package pro.sky.homework14.transport;
 import java.util.Date;
 
 public class Car {
-    public class Key{
+    public class Key {
         private final boolean removeStart;
         private final boolean keylessAccess;
 
@@ -15,11 +15,12 @@ public class Car {
                     '.';
         }
 
-        public Key(boolean removeStart, boolean keylessAccess){
+        public Key(boolean removeStart, boolean keylessAccess) {
             this.keylessAccess = keylessAccess;
             this.removeStart = removeStart;
+        }
 
-        };
+
 
         public boolean isRemoveStart() {
             return removeStart;
@@ -29,6 +30,7 @@ public class Car {
             return keylessAccess;
         }
     }
+
     private final String brand;
     private final String model;
     private double engineVolume;
@@ -40,61 +42,61 @@ public class Car {
     private String registrationNumber;
     private final int countSeats;
     private boolean summerTires;
+    private Key key;
 
+    private static final String DEFAULT_VALUE = "default value";
+    private static final double DEFAULT_ENGINE_VOLUME = 1.5;
+    private static final String DEFAULT_COLOR = "white";
+    private static final int DEFAULT_YEAR = 2000;
+    private static final int DEFAULT_COUNT_SEATS = 5;
 
     public Car(String brand, String model, double engineVolume, String color, int year, String country,
-               String transmission, String bodyType, String registrationNumber, int countSeats, boolean summerTires) {
-        if (brand == "" || brand == null || brand.isBlank() || brand.isEmpty()) {
-            this.brand = "no information";
+               String transmission, String bodyType, String registrationNumber, int countSeats, boolean summerTires,
+               boolean keylessAccess, boolean removeStart) {
+
+        if (brand == null || brand.isBlank()) {
+            this.brand = DEFAULT_VALUE;
         } else {
             this.brand = brand;
         }
         if (model == "" || model == null || model.isBlank() || model.isEmpty()) {
-            this.model = "no information";
+            this.model = DEFAULT_VALUE;
         } else {
             this.model = model;
         }
-        if (engineVolume <= 0) {
-            this.engineVolume = 1.5;
-        } else {
-            this.engineVolume = engineVolume;
-        }
-        if (color == "" || color == null || color.isEmpty() || color.isBlank()) {
-            this.color = "White";
-        } else {
-            this.color = color;
-        }
+
+        setEngineVolume(engineVolume);
+        setColor(color);
+
         if (year <= 0) {
-            this.year = 2000;
+            this.year = DEFAULT_YEAR;
         } else {
             this.year = year;
         }
         if (country == "" || country == null || country.isBlank() || country.isEmpty()) {
-            this.country = "no information";
+            this.country = DEFAULT_VALUE;
         } else {
             this.country = country;
         }
-        if (transmission != "automate" || transmission != "robot" || transmission != "mechanics") {
-            this.transmission = "no information";
-        } else {
-            this.transmission = transmission;
-        }
+
+        setTransmission(transmission);
+
         if (bodyType == null || bodyType.isEmpty() || bodyType.isBlank()) {
             this.bodyType = "no information";
         } else {
             this.bodyType = bodyType;
         }
-        if (registrationNumber == "" || registrationNumber == null || registrationNumber.isBlank() || registrationNumber.isEmpty()) {
-            this.registrationNumber = "no information";
-        } else {
-            this.registrationNumber = registrationNumber;
-        }
+
+        setRegistrationNumber(registrationNumber);
+
         if (countSeats <= 0) {
-            this.countSeats = 5;
+            this.countSeats = DEFAULT_COUNT_SEATS;
         } else {
             this.countSeats = countSeats;
         }
-        this.summerTires = summerTires;
+
+        setSummerTires(summerTires);
+        setKey(keylessAccess, removeStart);
     }
 
     public String getBrand() {
@@ -121,7 +123,7 @@ public class Car {
         return country;
     }
 
-    public String transmission() {
+    public String getTransmission() {
         return transmission;
     }
 
@@ -137,32 +139,49 @@ public class Car {
         return countSeats;
     }
 
-    public boolean isSummerTires() {
+    public boolean getIsSummerTires() {
         return summerTires;
     }
 
+
     public void setEngineVolume(double engineVolume) {
-        this.engineVolume = engineVolume;
+        if (engineVolume <= 0) {
+            this.engineVolume = DEFAULT_ENGINE_VOLUME;
+        } else {
+            this.engineVolume = engineVolume;
+        }
     }
 
     public void setColor(String color) {
-        this.color = color;
+        if (color == null || color.isBlank()) {
+            this.color = DEFAULT_COLOR;
+        } else {
+            this.color = color;
+        }
     }
 
     public void setTransmission(String transmission) {
-        this.transmission = transmission;
+        if (transmission == null || transmission.isBlank()) {
+            this.transmission = DEFAULT_VALUE;
+        } else {
+            this.transmission = transmission;
+        }
     }
 
     public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
-
-    public void setTires(boolean summerTires) {
-        this.summerTires = summerTires;
+        if (registrationNumber == null || registrationNumber.isBlank()) {
+            this.registrationNumber = "no information";
+        } else {
+            this.registrationNumber = registrationNumber;
+        }
     }
 
     public void setSummerTires(boolean summerTires) {
         this.summerTires = summerTires;
+    }
+
+    public void setKey(boolean keylessAccess, boolean removeStar) {
+        this.key = new Key(keylessAccess, removeStar);
     }
 
     public void tireChange(int month) {
@@ -187,7 +206,8 @@ public class Car {
                 ", body type - " + bodyType +
                 ", registration number - " + registrationNumber +
                 ", count seats - " + countSeats +
-                ", summer tires - " + summerTires + ".";
+                ", summer tires - " + summerTires +
+                ", remove control: " + key;
 
     }
 }

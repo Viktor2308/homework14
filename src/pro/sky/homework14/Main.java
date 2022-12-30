@@ -16,6 +16,8 @@ public class Main {
                 "sedan",
                 "",
                 5,
+                false,
+                false,
                 false);
         Car audiA8 = new Car(
                 "Audi",
@@ -28,7 +30,9 @@ public class Main {
                 "universal",
                 "",
                 5,
-                true);
+                true,
+                false,
+                false);
         Car bmwZ8 = new Car(
                 "BMW",
                 "Z8",
@@ -40,6 +44,8 @@ public class Main {
                 "cope",
                 "",
                 2,
+                true,
+                true,
                 true);
         Car kiaSportage = new Car(
                 "KIA",
@@ -52,7 +58,9 @@ public class Main {
                 "universal",
                 "",
                 5,
-                true);
+                true,
+                false,
+                false);
         Car huendaiAvante = new Car(
                 "Huendai",
                 "Avante",
@@ -64,7 +72,9 @@ public class Main {
                 "",
                 "",
                 5,
-                true);
+                true,
+                true,
+                false);
 
 
         System.out.println(ladaGranta);
@@ -76,8 +86,7 @@ public class Main {
         kiaSportage.tireChange(11);
         ladaGranta.tireChange(6);
         System.out.println();
-        Car.Key bmwKey = bmwZ8.new Key(true, true);
-        System.out.println(bmwKey);
+
 
 //        Car ladaGranta = new Car();
 //        ladaGranta.brand = "Lada";
