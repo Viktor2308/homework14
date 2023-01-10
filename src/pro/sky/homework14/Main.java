@@ -1,5 +1,6 @@
 package pro.sky.homework14;
 
+import pro.sky.homework14.transport.Bus;
 import pro.sky.homework14.transport.Car;
 
 public class Main {
@@ -8,10 +9,11 @@ public class Main {
         Car ladaGranta = new Car(
                 "Lada",
                 "Granta",
-                1.7,
-                "Yellow",
                 2015,
                 "Russia",
+                "Yellow",
+                160,
+                1.7,
                 "automate",
                 "sedan",
                 "",
@@ -22,10 +24,11 @@ public class Main {
         Car audiA8 = new Car(
                 "Audi",
                 "A8 50 L TDI quattro",
-                3.0,
-                "Black",
                 2020,
                 "Germany",
+                "Black",
+                240,
+                3.0,
                 "robot",
                 "universal",
                 "",
@@ -36,10 +39,11 @@ public class Main {
         Car bmwZ8 = new Car(
                 "BMW",
                 "Z8",
-                3.0,
-                "Black",
                 2021,
                 "Germany",
+                "Black",
+                260,
+                3.0,
                 "",
                 "cope",
                 "",
@@ -50,10 +54,11 @@ public class Main {
         Car kiaSportage = new Car(
                 "KIA",
                 "Sportage 4-th generation",
-                2.4,
-                "Rad",
                 2018,
                 "Sous Korea",
+                "Rad",
+                0,
+                2.4,
                 "",
                 "universal",
                 "",
@@ -64,10 +69,11 @@ public class Main {
         Car huendaiAvante = new Car(
                 "Huendai",
                 "Avante",
-                1.6,
-                "Orange",
                 2016,
                 "Sous Korea",
+                "Orange",
+                0,
+                1.6,
                 "",
                 "",
                 "",
@@ -87,47 +93,32 @@ public class Main {
         ladaGranta.tireChange(6);
         System.out.println();
 
-
-//        Car ladaGranta = new Car();
-//        ladaGranta.brand = "Lada";
-//        ladaGranta.model = "Granta";
-//        ladaGranta.engineVolume = 1.7;
-//        ladaGranta.color = "Yellow";
-//        ladaGranta.year = 2015;
-//        ladaGranta.country = "Russia";
-//
-//        Car audiA8 = new Car();
-//        audiA8.brand = "Audi";
-//        audiA8.model = "A8 50 L TDI quattro";
-//        audiA8.engineVolume = 3.0;
-//        audiA8.color = "Black";
-//        audiA8.year = 2020;
-//        audiA8.country = "Germany";
-//
-//        Car bmwZ8 = new Car();
-//        bmwZ8.brand = "BMW";
-//        bmwZ8.model = "Z8";
-//        bmwZ8.engineVolume = 3.0;
-//        bmwZ8.color = "Black";
-//        bmwZ8.year = 2021;
-//        bmwZ8.country = "Germany";
-//
-//        Car kiaSportage = new Car();
-//        kiaSportage.brand = "KIA";
-//        kiaSportage.model = "Sportage 4-th generation";
-//        kiaSportage.engineVolume = 2.4;
-//        kiaSportage.color = "Rad";
-//        kiaSportage.year = 2018;
-//        kiaSportage.country = "Sous Korea";
-//
-//        Car huendaiAvante = new Car();
-//        huendaiAvante.brand = "Huendai";
-//        huendaiAvante.model = "Avante";
-//        huendaiAvante.engineVolume = 1.6;
-//        huendaiAvante.color = "Orange";
-//        huendaiAvante.year = 2016;
-//        huendaiAvante.country = "Sous Korea";
-
-
+        Bus busVolvo = new Bus(
+                "Volvo",
+                "Volvo 9500",
+                2011,
+                "Sweden",
+                "silver",
+                120
+        );
+        Bus busScania = new Bus(
+                "Scania",
+                "Scania CRUIZE",
+                2003,
+                "Sweden",
+                "blue",
+                110
+        );
+        Bus busHyundai = new Bus(
+                "Hyundai",
+                "Hyundai Universe",
+                2011,
+                "Sous Korea",
+                "",
+                120
+        );
+        System.out.println(busHyundai);
+        System.out.println(busVolvo);
+        System.out.println(busScania);
     }
 }
