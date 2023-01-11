@@ -1,6 +1,6 @@
 package pro.sky.homework14.transport;
 
-public class Transport {
+public abstract class Transport {
     private String mark;
     private String model;
     private final int year;
