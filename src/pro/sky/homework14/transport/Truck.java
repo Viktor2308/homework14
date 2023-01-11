@@ -1,10 +1,11 @@
 package pro.sky.homework14.transport;
 
-import pro.sky.homework14.driver.BusDriver;
+import pro.sky.homework14.driver.TruckDriver;
 
-public class Bus<T extends BusDriver> extends Transport {
 
-    public Bus(String mark, String model, double engineVolume) {
+public class Truck<T extends TruckDriver> extends Transport {
+
+    public Truck(String mark, String model, double engineVolume) {
         super(mark, model, engineVolume);
     }
 
@@ -17,3 +18,4 @@ public class Bus<T extends BusDriver> extends Transport {
         }
     }
 }
+

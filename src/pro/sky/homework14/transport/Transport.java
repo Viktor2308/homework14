@@ -1,19 +1,18 @@
 package pro.sky.homework14.transport;
 
-public abstract class Transport {
-    private String mark;
-    private String model;
-    private final int year;
-    private final String country;
-    private String bodyColor;
-    private int maxSpeed;
+import pro.sky.homework14.Competitor;
+
+import java.util.Objects;
+
+public abstract class Transport implements Competitor {
+    private final String mark;
+    private final String model;
+    private double engineVolume;
 
     protected static final String DEFAULT_VALUE = "default value";
-    private static final String DEFAULT_COLOR = "white";
-    private static final int DEFAULT_SPEED = 120;
-    private static final int DEFAULT_YEAR = 2000;
+    private static final double DEFAULT_ENGINE_VOLUME = 1.5;
 
-    public Transport(String mark, String model, int year, String country, String bodyColor, int maxSpeed) {
+    public Transport(String mark, String model, double engineVolume) {
         if (mark == null || mark.isBlank()) {
             this.mark = DEFAULT_VALUE;
         } else {
@@ -24,35 +23,10 @@ public abstract class Transport {
         } else {
             this.model = model;
         }
-        if (year <= 0) {
-            this.year = DEFAULT_YEAR;
-        } else {
-            this.year = year;
-        }
-        if (country == null || country.isBlank()) {
-            this.country = DEFAULT_VALUE;
-        } else {
-            this.country = country;
-        }
-        setBodyColor(bodyColor);
-        setMaxSpeed(maxSpeed);
+        setEngineVolume(engineVolume);
+
     }
 
-    public void setBodyColor(String bodyColor) {
-        if (bodyColor == null || bodyColor.isBlank()) {
-            this.bodyColor = DEFAULT_COLOR;
-        } else {
-            this.bodyColor = bodyColor;
-        }
-    }
-
-    public void setMaxSpeed(int maxSpeed) {
-        if (maxSpeed == 0) {
-            this.maxSpeed = DEFAULT_SPEED;
-        } else {
-            this.maxSpeed = maxSpeed;
-        }
-    }
 
     public String getMark() {
         return mark;
@@ -62,30 +36,58 @@ public abstract class Transport {
         return model;
     }
 
-    public int getYear() {
-        return year;
+    public double getEngineVolume() {
+        return engineVolume;
     }
 
-    public String getCountry() {
-        return country;
+    public void setEngineVolume(double engineVolume) {
+        if (engineVolume <= 0) {
+            this.engineVolume = DEFAULT_ENGINE_VOLUME;
+        } else {
+            this.engineVolume = engineVolume;
+        }
     }
 
-    public String getBodyColor() {
-        return bodyColor;
+    public void startMovement() {
+        System.out.println(getMark() + ' ' + getModel() + " start race.");
     }
 
-    public int getMaxSpeed() {
-        return maxSpeed;
+    public void endMovement() {
+        System.out.println(getMark() + ' ' + getModel() + " end race.");
     }
 
     @Override
+    public void pitStop() {
+        System.out.println(this.getMark() + " " + this.getModel() + " in the Pit Stop.");
+    }
+
+    @Override
+    public void bestLapTime() {
+        System.out.println(this.getMark() + " " + this.getModel() + " have a best lap.");
+    }
+
+    @Override
+    public void maxSpeed() {
+        System.out.println(this.getMark() + " " + this.getModel() + " have a maximum speed.");
+    }
+
+
+    @Override
     public String toString() {
-        return "Transport " +
-                "mark='" + mark + '\'' +
-                ", model='" + model + '\'' +
-                ", year=" + year +
-                ", country='" + country + '\'' +
-                ", bodyColor='" + bodyColor + '\'' +
-                ", maxSpeed=" + maxSpeed;
+        return mark + ' ' + model + ' ' + " engine volume " + engineVolume + "l.";
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transport transport = (Transport) o;
+        return Double.compare(transport.engineVolume, engineVolume) == 0 && Objects.equals(mark, transport.mark) && Objects.equals(model, transport.model);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mark, model, engineVolume);
     }
 }

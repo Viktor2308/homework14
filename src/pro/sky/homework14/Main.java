@@ -1,124 +1,65 @@
 package pro.sky.homework14;
 
+import pro.sky.homework14.driver.BusDriver;
+import pro.sky.homework14.driver.CarDriver;
+import pro.sky.homework14.driver.Driver;
+import pro.sky.homework14.driver.TruckDriver;
 import pro.sky.homework14.transport.Bus;
 import pro.sky.homework14.transport.Car;
+import pro.sky.homework14.transport.Transport;
+import pro.sky.homework14.transport.Truck;
 
 public class Main {
     public static void main(String[] args) {
 
-        Car ladaGranta = new Car(
-                "Lada",
-                "Granta",
-                2015,
-                "Russia",
-                "Yellow",
-                160,
-                1.7,
-                "automate",
-                "sedan",
-                "",
-                5,
-                false,
-                false,
-                false);
-        Car audiA8 = new Car(
-                "Audi",
-                "A8 50 L TDI quattro",
-                2020,
-                "Germany",
-                "Black",
-                240,
-                3.0,
-                "robot",
-                "universal",
-                "",
-                5,
-                true,
-                false,
-                false);
-        Car bmwZ8 = new Car(
-                "BMW",
-                "Z8",
-                2021,
-                "Germany",
-                "Black",
-                260,
-                3.0,
-                "",
-                "cope",
-                "",
-                2,
-                true,
-                true,
-                true);
-        Car kiaSportage = new Car(
-                "KIA",
-                "Sportage 4-th generation",
-                2018,
-                "Sous Korea",
-                "Rad",
-                0,
-                2.4,
-                "",
-                "universal",
-                "",
-                5,
-                true,
-                false,
-                false);
-        Car huendaiAvante = new Car(
-                "Huendai",
-                "Avante",
-                2016,
-                "Sous Korea",
-                "Orange",
-                0,
-                1.6,
-                "",
-                "",
-                "",
-                5,
-                true,
-                true,
-                false);
+        CarDriver carDriver = new CarDriver("Ivan Ivanov", true, 10);
+        TruckDriver truckDriver = new TruckDriver("Petr Petrov", true, 6);
+        BusDriver busDriver = new BusDriver("Mixail Mihailov", true, 8);
+
+        Car<CarDriver> carLadaGranta = new Car("Lada", "Granta", 1.7);
+        Car<CarDriver> carAudiA8 = new Car("Audi", "A8 50 L TDI quattro", 3.0);
+        Car<CarDriver> carBmwZ8 = new Car("BMW", "Z8", 3.0);
+        Car<CarDriver> carMercedes = new Car("Mercedes", "A250", 2.5);
+
+        Truck<TruckDriver> truckKamaz = new Truck("Kamaz", "3116", 9);
+        Truck<TruckDriver> truckScania = new Truck("Scania", "G18", 8.5);
+        Truck<TruckDriver> truckVolvo = new Truck("Volvo", "Volvo Truck 8000", 8.2);
+        Truck<TruckDriver> truckMan = new Truck("Man", "Man 666", 9.9);
+
+        Bus<BusDriver> busVolvo = new Bus("Volvo", "Volvo 9500", 7.7);
+        Bus<BusDriver> busScania = new Bus("Scania", "Scania CRUIZE", 8);
+        Bus<BusDriver> busHyundai = new Bus("Hyundai", "Hyundai Universe", 8.5);
+        Bus<BusDriver> busIkarus = new Bus("Ikarus", "Ikarus 7000", 7);
+
+        carMercedes.participateInRace(carDriver);
+
+        truckKamaz.participateInRace(truckDriver);
+
+        busVolvo.participateInRace(busDriver);
+
+        transportAllMethod(busIkarus);
+        driverAllMethod(truckDriver);
+
+        busDriver.setDriveLicense(false);
+        busVolvo.participateInRace(busDriver);
+        driverAllMethod(busDriver);
 
 
-        System.out.println(ladaGranta);
-        System.out.println(audiA8);
-        System.out.println(bmwZ8);
-        System.out.println(kiaSportage);
-        System.out.println(huendaiAvante);
-        System.out.println();
-        kiaSportage.tireChange(11);
-        ladaGranta.tireChange(6);
-        System.out.println();
-
-        Bus busVolvo = new Bus(
-                "Volvo",
-                "Volvo 9500",
-                2011,
-                "Sweden",
-                "silver",
-                120
-        );
-        Bus busScania = new Bus(
-                "Scania",
-                "Scania CRUIZE",
-                2003,
-                "Sweden",
-                "blue",
-                110
-        );
-        Bus busHyundai = new Bus(
-                "Hyundai",
-                "Hyundai Universe",
-                2011,
-                "Sous Korea",
-                "",
-                120
-        );
-        System.out.println(busHyundai);
-        System.out.println(busVolvo);
-        System.out.println(busScania);
     }
+
+    public static void transportAllMethod(Transport transport) {
+
+        transport.startMovement();
+        transport.pitStop();
+        transport.endMovement();
+        transport.bestLapTime();
+        transport.maxSpeed();
+    }
+
+    public static void driverAllMethod(Driver driver) {
+        driver.startDrive();
+        driver.refuelTransport();
+        driver.stopDrive();
+    }
+
 }
