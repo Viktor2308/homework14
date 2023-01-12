@@ -1,10 +1,11 @@
 package pro.sky.homework14.transport;
 
 import pro.sky.homework14.Competitor;
+import pro.sky.homework14.driver.Driver;
 
 import java.util.Objects;
 
-public abstract class Transport implements Competitor {
+public abstract class Transport<T extends Driver> implements Competitor {
     private final String mark;
     private final String model;
     private double engineVolume;
@@ -24,7 +25,6 @@ public abstract class Transport implements Competitor {
             this.model = model;
         }
         setEngineVolume(engineVolume);
-
     }
 
 
@@ -71,11 +71,11 @@ public abstract class Transport implements Competitor {
         System.out.println(this.getMark() + " " + this.getModel() + " have a maximum speed.");
     }
 
+    public abstract void participateInRace(T driver);
 
     @Override
     public String toString() {
         return mark + ' ' + model + ' ' + " engine volume " + engineVolume + "l.";
-
     }
 
     @Override
@@ -90,4 +90,6 @@ public abstract class Transport implements Competitor {
     public int hashCode() {
         return Objects.hash(mark, model, engineVolume);
     }
+
+
 }

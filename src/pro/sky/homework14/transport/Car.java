@@ -2,13 +2,14 @@ package pro.sky.homework14.transport;
 
 import pro.sky.homework14.driver.CarDriver;
 
-public class Car<T extends CarDriver> extends Transport {
+public class Car extends Transport<CarDriver> {
 
     public Car(String mark, String model, double engineVolume) {
         super(mark, model, engineVolume);
     }
 
-    public void participateInRace(T driver) {
+    @Override
+    public void participateInRace(CarDriver driver) {
         if (driver.isDriveLicense()) {
             System.out.println("Driver " + driver.getName() + " is driving car " +
                     this.toString() + " and will be participating in the race.");
@@ -16,6 +17,38 @@ public class Car<T extends CarDriver> extends Transport {
             System.out.println(driver.getName() + " don't drive, because don't have drive licence!");
         }
     }
+
+    @Override
+    public void startMovement() {
+        System.out.print("Car ");
+        super.startMovement();
+    }
+
+    @Override
+    public void endMovement() {
+        System.out.print("Car ");
+        super.endMovement();
+    }
+
+    @Override
+    public void pitStop() {
+        System.out.print("Car ");
+        super.pitStop();
+    }
+
+    @Override
+    public void bestLapTime() {
+        System.out.print("Car ");
+        super.bestLapTime();
+    }
+
+    @Override
+    public void maxSpeed() {
+        System.out.print("Car ");
+        super.maxSpeed();
+    }
+
+
 }
 
 //    public class Key {
