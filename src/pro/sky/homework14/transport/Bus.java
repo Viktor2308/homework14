@@ -101,4 +101,9 @@ public class Bus extends Transport<BusDriver> {
     public void printType() {
         System.out.println("Bus " + getMark() + ' ' + getModel() + ' ' + getPeopleCapacity());
     }
+
+    @Override
+    public void doDiagnostic() throws UnsupportedOperationException {
+        throw new UnsupportedOperationException("Transport Bus - can't pass diagnostics.");
+    }
 }

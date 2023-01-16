@@ -4,10 +4,11 @@ public abstract class Driver {
     private final String name;
     private boolean driveLicense;
     private int yearsDriver;
+    protected TypeLicense typeLicense;
 
     private static final String DEFAULT_VALUE = "default value";
 
-    public Driver(String name, boolean driveLicense, int yearsDriver) {
+    public Driver(String name, boolean driveLicense, int yearsDriver) throws NoLicenseException {
         if (name == null || name.isBlank()) {
             this.name = DEFAULT_VALUE;
         } else {
@@ -15,6 +16,17 @@ public abstract class Driver {
         }
         this.driveLicense = driveLicense;
         setYearsDriver(yearsDriver);
+
+    }
+
+    public enum TypeLicense {
+        A, B, C, D;
+    }
+
+    public abstract void setTypeLicense(TypeLicense typeLicense) throws NoLicenseException;
+
+    public TypeLicense getTypeLicense() {
+        return typeLicense;
     }
 
     public String getName() {
@@ -68,6 +80,7 @@ public abstract class Driver {
                 "name='" + name + '\'' +
                 ", driveLicense=" + driveLicense +
                 ", yearsDriver=" + yearsDriver +
+                ", typeLicense=" + typeLicense +
                 '}';
     }
 }

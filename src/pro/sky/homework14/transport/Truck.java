@@ -74,6 +74,11 @@ public class Truck extends Transport<TruckDriver> {
     }
 
     @Override
+    public void doDiagnostic() {
+        System.out.println(getMark()+ ' ' + getModel() + " - truck diagnostics done.");
+    }
+
+    @Override
     public void startMovement() {
         System.out.print("Truck ");
         super.startMovement();
