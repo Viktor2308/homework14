@@ -4,8 +4,57 @@ import pro.sky.homework14.driver.BusDriver;
 
 public class Bus extends Transport<BusDriver> {
 
-    public Bus(String mark, String model, double engineVolume) {
+    private PeopleCapacity peopleCapacity;
+
+
+    public Bus(String mark, String model, double engineVolume, PeopleCapacity peopleCapacity) {
         super(mark, model, engineVolume);
+        this.peopleCapacity = peopleCapacity;
+    }
+
+    public enum PeopleCapacity {
+        EXTRA_SMALL(null, 10),
+        SMALL(null, 25),
+        MEDIUM(40, 50),
+        LARGE(60, 80),
+        ESPECIALLY_LARGE(100, 120),
+        NO_INFORMATION(null, null);
+
+        final Integer minCapacity;
+        final Integer maxCapacity;
+
+        public Integer getMinCapacity() {
+            return minCapacity;
+        }
+
+        public Integer getMaxCapacity() {
+            return maxCapacity;
+        }
+
+        PeopleCapacity(Integer minCapacity, Integer maxCapacity) {
+            this.minCapacity = minCapacity;
+            this.maxCapacity = maxCapacity;
+
+        }
+
+        @Override
+        public String toString() {
+            if (minCapacity == null && maxCapacity == null) {
+                return "No information about capasity.";
+            } else if (minCapacity == null) {
+                return "People capacity up to " + maxCapacity + " seats.";
+            } else {
+                return "People capacity " + minCapacity + " - " + maxCapacity + " seats.";
+            }
+        }
+    }
+
+    public PeopleCapacity getPeopleCapacity() {
+        return peopleCapacity;
+    }
+
+    public void setPeopleCapacity(PeopleCapacity peopleCapacity) {
+        this.peopleCapacity = peopleCapacity;
     }
 
     @Override
@@ -48,4 +97,8 @@ public class Bus extends Transport<BusDriver> {
         super.maxSpeed();
     }
 
+    @Override
+    public void printType() {
+        System.out.println("Bus " + getMark() + ' ' + getModel() + ' ' + getPeopleCapacity());
+    }
 }

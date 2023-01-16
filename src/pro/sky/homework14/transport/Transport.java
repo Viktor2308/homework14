@@ -72,6 +72,7 @@ public abstract class Transport<T extends Driver> implements Competitor {
     }
 
     public abstract void participateInRace(T driver);
+    public abstract void printType();
 
     @Override
     public String toString() {

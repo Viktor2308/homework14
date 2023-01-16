@@ -4,8 +4,51 @@ import pro.sky.homework14.driver.CarDriver;
 
 public class Car extends Transport<CarDriver> {
 
-    public Car(String mark, String model, double engineVolume) {
+    private CarBodyType carBodyType;
+
+    public Car(String mark, String model, double engineVolume, CarBodyType carBodyType) {
         super(mark, model, engineVolume);
+        setCarBodyType(carBodyType);
+    }
+
+    public enum CarBodyType {
+        SEDAN("Седан"),
+        HATCHBACK("Хетчбек"),
+        COUPE("Купе"),
+        UNIVERSAL("Универсал"),
+        SUV("Внедорожник"),
+        CROSSOVER("Кроссовер"),
+        PICKUP("Пикап"),
+        VAN("Фургон"),
+        MINIVAN("Минивэн"),
+        NO_INFORMATION("No body type information");
+
+        private String bodyName;
+
+        CarBodyType(String bodyName) {
+            this.bodyName = bodyName;
+        }
+
+        public String getBodyName() {
+            return bodyName;
+        }
+
+        @Override
+        public String toString() {
+            return "Body type - " + bodyName;
+        }
+    }
+
+    public CarBodyType getCarBodyType() {
+        return carBodyType;
+    }
+
+    public void setCarBodyType(CarBodyType carBodyType) {
+        if (carBodyType == null) {
+            this.carBodyType = CarBodyType.valueOf(DEFAULT_VALUE);
+        } else {
+            this.carBodyType = carBodyType;
+        }
     }
 
     @Override
@@ -48,7 +91,10 @@ public class Car extends Transport<CarDriver> {
         super.maxSpeed();
     }
 
-
+    @Override
+    public void printType() {
+        System.out.println("Car " + getMark() + ' ' + getModel() + ' ' + getCarBodyType());
+    }
 }
 
 //    public class Key {
