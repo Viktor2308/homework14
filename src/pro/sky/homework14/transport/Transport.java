@@ -72,6 +72,7 @@ public abstract class Transport<T extends Driver> implements Competitor {
     }
 
     public abstract void participateInRace(T driver);
+
     public abstract void printType();
 
     @Override
@@ -92,5 +93,6 @@ public abstract class Transport<T extends Driver> implements Competitor {
         return Objects.hash(mark, model, engineVolume);
     }
 
+    public abstract void doDiagnostic();
 
 }

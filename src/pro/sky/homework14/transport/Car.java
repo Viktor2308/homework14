@@ -95,6 +95,11 @@ public class Car extends Transport<CarDriver> {
     public void printType() {
         System.out.println("Car " + getMark() + ' ' + getModel() + ' ' + getCarBodyType());
     }
+
+    @Override
+    public void doDiagnostic() {
+        System.out.println(getMark()+ ' ' + getModel() + " - car diagnostics done.");
+    }
 }
 
 //    public class Key {
