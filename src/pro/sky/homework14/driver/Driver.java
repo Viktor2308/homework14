@@ -1,10 +1,16 @@
 package pro.sky.homework14.driver;
 
+import pro.sky.homework14.mechanic.Mechanic;
+
+import java.util.LinkedList;
+
 public abstract class Driver {
     private final String name;
     private boolean driveLicense;
     private int yearsDriver;
+    private boolean isFree;
     protected TypeLicense typeLicense;
+    private static final LinkedList<Driver> driversList = new LinkedList<>();
 
     private static final String DEFAULT_VALUE = "default value";
 
@@ -16,6 +22,8 @@ public abstract class Driver {
         }
         this.driveLicense = driveLicense;
         setYearsDriver(yearsDriver);
+        driversList.add(Driver.this);
+        isFree = true;
 
     }
 
@@ -23,10 +31,25 @@ public abstract class Driver {
         A, B, C, D;
     }
 
+    public static LinkedList<Driver> getDriversList() {
+        return driversList;
+    }
+
+    public boolean isFree() {
+        return isFree;
+    }
+
+    public void setFree(boolean free) {
+        isFree = free;
+    }
+
     public abstract void setTypeLicense(TypeLicense typeLicense) throws NoLicenseException;
 
-    public TypeLicense getTypeLicense() {
-        return typeLicense;
+    public TypeLicense getTypeLicense() throws NullPointerException{
+        if (typeLicense != null) {
+            return typeLicense;
+        }
+        throw new NullPointerException("No type licence " + this);
     }
 
     public String getName() {

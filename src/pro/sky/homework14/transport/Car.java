@@ -1,10 +1,18 @@
 package pro.sky.homework14.transport;
 
 import pro.sky.homework14.driver.CarDriver;
+import pro.sky.homework14.driver.Driver;
+import pro.sky.homework14.mechanic.Mechanic;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Car extends Transport<CarDriver> {
-
+    private static final int COUNT_MECHANIC_SERVICE = 2;
+    private final List<Mechanic> serviceTeam = new ArrayList<>(COUNT_MECHANIC_SERVICE);
     private CarBodyType carBodyType;
+
 
     public Car(String mark, String model, double engineVolume, CarBodyType carBodyType) {
         super(mark, model, engineVolume);
@@ -49,6 +57,10 @@ public class Car extends Transport<CarDriver> {
         } else {
             this.carBodyType = carBodyType;
         }
+    }
+
+    public List<Mechanic> getServiceTeam() {
+        return serviceTeam;
     }
 
     @Override
@@ -98,7 +110,66 @@ public class Car extends Transport<CarDriver> {
 
     @Override
     public void doDiagnostic() {
-        System.out.println(getMark()+ ' ' + getModel() + " - car diagnostics done.");
+        System.out.println(getMark() + ' ' + getModel() + " - car diagnostics done.");
+    }
+
+    @Override
+    public void infoAboutTeam() {
+        System.out.println("Car " + getMark() + getModel() + " driving " + getDriver().getName() + ", services team: " + serviceTeam);
+    }
+
+    @Override
+    public void createServiceTeam(LinkedList<Mechanic> mechanicList) {
+        if (serviceTeam.isEmpty()) {
+            for (Mechanic mechanic : mechanicList) {
+                if (mechanic.isFree() && mechanic.iCanServiceThisCar(Car.this) && serviceTeam.size() < COUNT_MECHANIC_SERVICE) {
+                    mechanic.setFree(false);
+                    serviceTeam.add(mechanic);
+                }
+            }
+        }
+        if (serviceTeam.size() == COUNT_MECHANIC_SERVICE) {
+            System.out.println("Car " + getMark() + " " + getModel() + " service team ready " + serviceTeam);
+        } else {
+            System.out.println("Service team not ready.");
+        }
+
+    }
+
+
+    @Override
+    public boolean setDriverForTransport(LinkedList<Driver> driver) {
+        for (int i = 0; i < driver.size(); i++) {
+            if (driver.get(i).isFree() && driver.get(i).getTypeLicense().equals(Driver.TypeLicense.B)) {
+                setDriver(driver.get(i));
+                driver.get(i).setFree(false);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean carryOutMaintenance() {
+        if (serviceTeam.isEmpty() || serviceTeam.size() != COUNT_MECHANIC_SERVICE) {
+            System.out.println("No team for carry out maintenance.");
+            return false;
+        } else {
+            System.out.println("Car " + getMark() + " to get carry out maintenance");
+            return true;
+        }
+
+    }
+
+    @Override
+    public boolean fixTheTransport() {
+        if (serviceTeam.isEmpty() || serviceTeam.size() != COUNT_MECHANIC_SERVICE) {
+            System.out.println("No team for fix the " + getMark() + " .");
+            return false;
+        } else {
+            System.out.println("Finish fix the car " + getMark());
+            return true;
+        }
     }
 }
 

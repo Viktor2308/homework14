@@ -2,13 +2,18 @@ package pro.sky.homework14.transport;
 
 import pro.sky.homework14.Competitor;
 import pro.sky.homework14.driver.Driver;
+import pro.sky.homework14.mechanic.Mechanic;
 
+import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Queue;
 
 public abstract class Transport<T extends Driver> implements Competitor {
     private final String mark;
     private final String model;
     private double engineVolume;
+    private Driver driver;
+    private static final LinkedList<Transport> transportList = new LinkedList<>();
 
     protected static final String DEFAULT_VALUE = "default value";
     private static final double DEFAULT_ENGINE_VOLUME = 1.5;
@@ -25,8 +30,20 @@ public abstract class Transport<T extends Driver> implements Competitor {
             this.model = model;
         }
         setEngineVolume(engineVolume);
+        transportList.add(Transport.this);
     }
 
+    public static LinkedList<Transport> getTransportList() {
+        return transportList;
+    }
+
+    protected void setDriver(Driver driver) {
+        this.driver = driver;
+    }
+
+    public Driver getDriver() {
+        return driver;
+    }
 
     public String getMark() {
         return mark;
@@ -94,5 +111,9 @@ public abstract class Transport<T extends Driver> implements Competitor {
     }
 
     public abstract void doDiagnostic();
+
+    public abstract void infoAboutTeam();
+
+    public abstract void createServiceTeam(LinkedList<Mechanic> mechanicList);
 
 }

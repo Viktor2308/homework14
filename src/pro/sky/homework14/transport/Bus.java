@@ -1,9 +1,16 @@
 package pro.sky.homework14.transport;
 
 import pro.sky.homework14.driver.BusDriver;
+import pro.sky.homework14.driver.Driver;
+import pro.sky.homework14.mechanic.Mechanic;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Bus extends Transport<BusDriver> {
-
+    private static final int COUNT_MECHANIC_SERVICE = 4;
+    private final List<Mechanic> serviceTeam = new ArrayList<>(COUNT_MECHANIC_SERVICE);
     private PeopleCapacity peopleCapacity;
 
 
@@ -97,13 +104,74 @@ public class Bus extends Transport<BusDriver> {
         super.maxSpeed();
     }
 
+
+    @Override
+    public void doDiagnostic() throws UnsupportedOperationException {
+        throw new UnsupportedOperationException("Transport Bus - can't pass diagnostics.");
+    }
+
+    @Override
+    public void infoAboutTeam() {
+        System.out.println("Bus " + getMark() + getModel() + " driving " + getDriver().getName() + ", services team: " + serviceTeam);
+    }
+
+
     @Override
     public void printType() {
         System.out.println("Bus " + getMark() + ' ' + getModel() + ' ' + getPeopleCapacity());
     }
 
     @Override
-    public void doDiagnostic() throws UnsupportedOperationException {
-        throw new UnsupportedOperationException("Transport Bus - can't pass diagnostics.");
+    public void createServiceTeam(LinkedList<Mechanic> mechanicList) {
+        if (serviceTeam.isEmpty()) {
+            for (Mechanic mechanic : mechanicList) {
+                if (mechanic.isFree() && mechanic.iCanServiceThisCar(Bus.this) && serviceTeam.size()<COUNT_MECHANIC_SERVICE) {
+                    mechanic.setFree(false);
+                    serviceTeam.add(mechanic);
+                }
+            }
+        }
+        if (serviceTeam.size() == COUNT_MECHANIC_SERVICE ) {
+            System.out.println("Truck " + getMark()+ " "+getModel()+" service team ready " + serviceTeam);
+        } else {
+            System.out.println("Truck service team not ready.");
+        }
+
+    }
+
+
+    @Override
+    public boolean setDriverForTransport(LinkedList<Driver> driver) {
+        for (int i = 0; i < driver.size(); i++) {
+            if(driver.get(i).isFree() && driver.get(i).getTypeLicense().equals(Driver.TypeLicense.D)){
+                setDriver(driver.get(i));
+                driver.get(i).setFree(false);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean carryOutMaintenance() {
+        if(serviceTeam.isEmpty() || serviceTeam.size()!=COUNT_MECHANIC_SERVICE){
+            System.out.println("No team for carry out maintenance.");
+            return false;
+        } else {
+            System.out.println("Bus " + getMark() + " to get carry out maintenance");
+            return true;
+        }
+
+    }
+
+    @Override
+    public boolean fixTheTransport() {
+        if(serviceTeam.isEmpty() || serviceTeam.size()!=COUNT_MECHANIC_SERVICE){
+            System.out.println("No team for fix the " + getMark() + " .");
+            return false;
+        } else {
+            System.out.println("Finish fix the bus " + getMark());
+            return true;
+        }
     }
 }
