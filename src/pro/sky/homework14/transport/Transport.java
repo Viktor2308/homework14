@@ -4,16 +4,14 @@ import pro.sky.homework14.Competitor;
 import pro.sky.homework14.driver.Driver;
 import pro.sky.homework14.mechanic.Mechanic;
 
-import java.util.LinkedList;
-import java.util.Objects;
-import java.util.Queue;
+import java.util.*;
 
 public abstract class Transport<T extends Driver> implements Competitor {
     private final String mark;
     private final String model;
     private double engineVolume;
     private Driver driver;
-    private static final LinkedList<Transport> transportList = new LinkedList<>();
+    private static final HashMap<Transport, Mechanic> transportList = new HashMap<>();
 
     protected static final String DEFAULT_VALUE = "default value";
     private static final double DEFAULT_ENGINE_VOLUME = 1.5;
@@ -30,10 +28,10 @@ public abstract class Transport<T extends Driver> implements Competitor {
             this.model = model;
         }
         setEngineVolume(engineVolume);
-        transportList.add(Transport.this);
+        transportList.put(Transport.this, null);
     }
 
-    public static LinkedList<Transport> getTransportList() {
+    public static HashMap<Transport,Mechanic> getTransportMap() {
         return transportList;
     }
 
@@ -92,6 +90,12 @@ public abstract class Transport<T extends Driver> implements Competitor {
 
     public abstract void printType();
 
+    public abstract void doDiagnostic();
+
+    public abstract void infoAboutTeam();
+
+    public abstract void createServiceTeam();
+
     @Override
     public String toString() {
         return mark + ' ' + model + ' ' + " engine volume " + engineVolume + "l.";
@@ -101,19 +105,12 @@ public abstract class Transport<T extends Driver> implements Competitor {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Transport transport = (Transport) o;
-        return Double.compare(transport.engineVolume, engineVolume) == 0 && Objects.equals(mark, transport.mark) && Objects.equals(model, transport.model);
+        Transport<?> transport = (Transport<?>) o;
+        return Double.compare(transport.engineVolume, engineVolume) == 0 && Objects.equals(mark, transport.mark) && Objects.equals(model, transport.model) && Objects.equals(driver, transport.driver);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(mark, model, engineVolume);
     }
-
-    public abstract void doDiagnostic();
-
-    public abstract void infoAboutTeam();
-
-    public abstract void createServiceTeam(LinkedList<Mechanic> mechanicList);
-
 }

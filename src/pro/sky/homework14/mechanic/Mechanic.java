@@ -6,16 +6,14 @@ import pro.sky.homework14.transport.Car;
 import pro.sky.homework14.transport.Transport;
 import pro.sky.homework14.transport.Truck;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class Mechanic {
     private String name;
     private String company;
     private List<Driver.TypeLicense> typeTransportMechanic;
     private boolean isFree;
-    private static final LinkedList<Mechanic> mechanicList = new LinkedList<>();
+    private static final HashSet<Mechanic> mechanicSet = new HashSet<>();
 
 
     private static final String DEFAULT_VALUE = "default value";
@@ -27,12 +25,12 @@ public class Mechanic {
             typeTransportMechanic = new ArrayList<Driver.TypeLicense>();
         }
         typeTransportMechanic.add(typeLicense);
-        mechanicList.add(Mechanic.this);
+        mechanicSet.add(Mechanic.this);
         isFree = true;
     }
 
-    public static LinkedList<Mechanic> getMechanicList() {
-        return mechanicList;
+    public static HashSet<Mechanic> getMechanicSet() {
+        return mechanicSet;
     }
 
 
@@ -90,11 +88,21 @@ public class Mechanic {
 
     }
 
-
-
-
     @Override
     public String toString() {
-        return name + ' ' + company + ' ' + typeTransportMechanic + " is free:" +isFree;
+        return name + ' ' + company + " service transport type: " + typeTransportMechanic;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mechanic mechanic = (Mechanic) o;
+        return isFree == mechanic.isFree && Objects.equals(name, mechanic.name) && Objects.equals(company, mechanic.company) && Objects.equals(typeTransportMechanic, mechanic.typeTransportMechanic);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, company, typeTransportMechanic);
     }
 }

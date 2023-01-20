@@ -2,7 +2,9 @@ package pro.sky.homework14.driver;
 
 import pro.sky.homework14.mechanic.Mechanic;
 
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public abstract class Driver {
     private final String name;
@@ -10,7 +12,7 @@ public abstract class Driver {
     private int yearsDriver;
     private boolean isFree;
     protected TypeLicense typeLicense;
-    private static final LinkedList<Driver> driversList = new LinkedList<>();
+    private static final HashSet<Driver> driversList = new HashSet<>();
 
     private static final String DEFAULT_VALUE = "default value";
 
@@ -31,7 +33,7 @@ public abstract class Driver {
         A, B, C, D;
     }
 
-    public static LinkedList<Driver> getDriversList() {
+    public static HashSet<Driver> getDriversList() {
         return driversList;
     }
 
@@ -99,11 +101,21 @@ public abstract class Driver {
 
     @Override
     public String toString() {
-        return "Driver{" +
-                "name='" + name + '\'' +
-                ", driveLicense=" + driveLicense +
-                ", yearsDriver=" + yearsDriver +
-                ", typeLicense=" + typeLicense +
-                '}';
+        return "Driver " + name  +
+                ", years driver " + yearsDriver +
+                ", type license " + typeLicense;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Driver driver = (Driver) o;
+        return driveLicense == driver.driveLicense && yearsDriver == driver.yearsDriver && Objects.equals(name, driver.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, driveLicense, yearsDriver);
     }
 }
