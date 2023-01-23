@@ -1,10 +1,8 @@
 package pro.sky.homework14.driver;
 
-import pro.sky.homework14.mechanic.Mechanic;
-
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Objects;
+
+import static pro.sky.homework14.driver.ServiceDriver.addDriver;
 
 public abstract class Driver {
     private final String name;
@@ -12,7 +10,7 @@ public abstract class Driver {
     private int yearsDriver;
     private boolean isFree;
     protected TypeLicense typeLicense;
-    private static final HashSet<Driver> driversList = new HashSet<>();
+
 
     private static final String DEFAULT_VALUE = "default value";
 
@@ -24,7 +22,7 @@ public abstract class Driver {
         }
         this.driveLicense = driveLicense;
         setYearsDriver(yearsDriver);
-        driversList.add(Driver.this);
+        addDriver(Driver.this);
         isFree = true;
 
     }
@@ -33,9 +31,7 @@ public abstract class Driver {
         A, B, C, D;
     }
 
-    public static HashSet<Driver> getDriversList() {
-        return driversList;
-    }
+
 
     public boolean isFree() {
         return isFree;

@@ -4,18 +4,11 @@ import pro.sky.homework14.driver.Driver;
 import pro.sky.homework14.driver.TruckDriver;
 import pro.sky.homework14.mechanic.Mechanic;
 
-//import java.util.ArrayList;
-//import java.util.HashSet;
-//import java.util.LinkedList;
-//import java.util.List;
-
-import static pro.sky.homework14.driver.Driver.getDriversList;
+import static pro.sky.homework14.driver.ServiceDriver.getDriversSet;
 import static pro.sky.homework14.mechanic.Mechanic.getMechanicSet;
 
 
 public class Truck extends Transport<TruckDriver> {
-//    private static final int COUNT_MECHANIC_SERVICE = 3;
-//    private final List<Mechanic> serviceTeam = new ArrayList<>(COUNT_MECHANIC_SERVICE);
     private LoadCapacity loadCapacity;
 
     public Truck(String mark, String model, double engineVolume, LoadCapacity loadCapacity) {
@@ -165,7 +158,7 @@ public class Truck extends Transport<TruckDriver> {
             System.out.println("Driver: " + getDriver());
             return false;
         } else {
-            for (Driver driver1 : getDriversList()) {
+            for (Driver driver1 : getDriversSet()) {
                 if (driver1.isFree() && driver1.getTypeLicense().equals(Driver.TypeLicense.C)) {
                     setDriver(driver1);
                     driver1.setFree(false);
@@ -184,7 +177,7 @@ public class Truck extends Transport<TruckDriver> {
 //            return false;
 //        } else {
 //            System.out.println("Truck " + getMark() + " to get carry out maintenance");
-            return true;
+        return true;
 //        }
 
     }
@@ -196,7 +189,7 @@ public class Truck extends Transport<TruckDriver> {
 //            return false;
 //        } else {
 //            System.out.println("Finish fix the truck " + getMark());
-            return true;
+        return true;
 //        }
     }
 

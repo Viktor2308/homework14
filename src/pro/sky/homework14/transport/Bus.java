@@ -4,12 +4,7 @@ import pro.sky.homework14.driver.BusDriver;
 import pro.sky.homework14.driver.Driver;
 import pro.sky.homework14.mechanic.Mechanic;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-
-import static pro.sky.homework14.driver.Driver.getDriversList;
+import static pro.sky.homework14.driver.ServiceDriver.getDriversSet;
 import static pro.sky.homework14.mechanic.Mechanic.getMechanicSet;
 
 public class Bus extends Transport<BusDriver> {
@@ -164,7 +159,7 @@ public class Bus extends Transport<BusDriver> {
             System.out.println("Driver: " + getDriver());
             return false;
         } else {
-            for (Driver driver1 : getDriversList()) {
+            for (Driver driver1 : getDriversSet()) {
                 if (driver1.isFree() && driver1.getTypeLicense().equals(Driver.TypeLicense.D)) {
                     setDriver(driver1);
                     driver1.setFree(false);

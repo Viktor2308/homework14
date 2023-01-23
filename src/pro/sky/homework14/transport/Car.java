@@ -4,17 +4,10 @@ import pro.sky.homework14.driver.CarDriver;
 import pro.sky.homework14.driver.Driver;
 import pro.sky.homework14.mechanic.Mechanic;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-
-import static pro.sky.homework14.driver.Driver.getDriversList;
+import static pro.sky.homework14.driver.ServiceDriver.getDriversSet;
 import static pro.sky.homework14.mechanic.Mechanic.getMechanicSet;
 
 public class Car extends Transport<CarDriver> {
-    //    private static final int COUNT_MECHANIC_SERVICE = 2;
-//    private final List<Mechanic> serviceTeam = new ArrayList<>(COUNT_MECHANIC_SERVICE);
     private CarBodyType carBodyType;
 
 
@@ -161,7 +154,7 @@ public class Car extends Transport<CarDriver> {
             System.out.println("Driver: " + getDriver());
             return false;
         } else {
-            for (Driver driver1 : getDriversList()) {
+            for (Driver driver1 : getDriversSet()) {
                 if (driver1.isFree() && driver1.getTypeLicense().equals(Driver.TypeLicense.B)) {
                     setDriver(driver1);
                     driver1.setFree(false);

@@ -12,6 +12,7 @@ import java.util.Map;
 //import static pro.sky.homework14.driver.Driver.getDriversList;
 //import static pro.sky.homework14.mechanic.Mechanic.getMechanicList;
 //import static pro.sky.homework14.transport.Transport.getTransportList;
+import static pro.sky.homework14.driver.ServiceDriver.allDriverInfo;
 import static pro.sky.homework14.transport.Transport.getTransportMap;
 
 
@@ -52,8 +53,9 @@ public class Main {
             entry.getKey().setDriverForTransport();
             entry.getKey().createServiceTeam();
         }
-        System.out.println();
-        System.out.println(getTransportMap());
+
+
+        allDriverInfo();
 
 
 //        for (Transport transport : getTransportList()) {
