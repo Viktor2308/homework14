@@ -4,7 +4,7 @@ import pro.sky.homework14.driver.Driver;
 import pro.sky.homework14.driver.TruckDriver;
 import pro.sky.homework14.mechanic.Mechanic;
 
-import static pro.sky.homework14.driver.ServiceDriver.getDriversSet;
+import static pro.sky.homework14.driver.ServiceDriver.getDriversHashSet;
 import static pro.sky.homework14.mechanic.Mechanic.getMechanicSet;
 
 
@@ -158,7 +158,7 @@ public class Truck extends Transport<TruckDriver> {
             System.out.println("Driver: " + getDriver());
             return false;
         } else {
-            for (Driver driver1 : getDriversSet()) {
+            for (Driver driver1 : getDriversHashSet()) {
                 if (driver1.isFree() && driver1.getTypeLicense().equals(Driver.TypeLicense.C)) {
                     setDriver(driver1);
                     driver1.setFree(false);

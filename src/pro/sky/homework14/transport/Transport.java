@@ -11,9 +11,10 @@ public abstract class Transport<T extends Driver> implements Competitor {
     private final String model;
     private double engineVolume;
     private Driver driver;
-    private static final HashMap<Transport, Mechanic> transportMap = new HashMap<>();
+    private static final HashMap<Transport, Mechanic> transportHashMap = new HashMap<>();
 
     protected static final String DEFAULT_VALUE = "default value";
+
     private static final double DEFAULT_ENGINE_VOLUME = 1.5;
 
     public Transport(String mark, String model, double engineVolume) {
@@ -28,11 +29,11 @@ public abstract class Transport<T extends Driver> implements Competitor {
             this.model = model;
         }
         setEngineVolume(engineVolume);
-        transportMap.put(Transport.this, null);
+        transportHashMap.put(Transport.this, null);
     }
 
     public static HashMap<Transport,Mechanic> getTransportMap() {
-        return transportMap;
+        return transportHashMap;
     }
 
     protected void setDriver(Driver driver) {
