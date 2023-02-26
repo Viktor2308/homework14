@@ -7,9 +7,13 @@ import pro.sky.homework14.transport.Car;
 import pro.sky.homework14.transport.Transport;
 import pro.sky.homework14.transport.Truck;
 
-import static pro.sky.homework14.driver.Driver.getDriversList;
-import static pro.sky.homework14.mechanic.Mechanic.getMechanicList;
-import static pro.sky.homework14.transport.Transport.getTransportList;
+import java.util.Map;
+
+//import static pro.sky.homework14.driver.Driver.getDriversList;
+//import static pro.sky.homework14.mechanic.Mechanic.getMechanicList;
+//import static pro.sky.homework14.transport.Transport.getTransportList;
+import static pro.sky.homework14.driver.ServiceDriver.allDriverInfo;
+import static pro.sky.homework14.transport.Transport.getTransportMap;
 
 
 public class Main {
@@ -45,13 +49,21 @@ public class Main {
         Bus busIkarus = new Bus("Ikarus", "Ikarus 7000", 7, Bus.PeopleCapacity.NO_INFORMATION);
 
         createMechanics();
-
-        for (Transport transport : getTransportList()) {
-            transport.createServiceTeam(getMechanicList());
-            transport.setDriverForTransport(getDriversList());
-            transport.carryOutMaintenance();
-            transport.fixTheTransport();
+        for (Map.Entry<Transport, Mechanic> entry : getTransportMap().entrySet()) {
+            entry.getKey().setDriverForTransport();
+            entry.getKey().createServiceTeam();
         }
+
+
+        allDriverInfo();
+
+
+//        for (Transport transport : getTransportList()) {
+//            transport.createServiceTeam(getMechanicList());
+//            transport.setDriverForTransport(getDriversList());
+//            transport.carryOutMaintenance();
+//            transport.fixTheTransport();
+//        }
 
 //        for (Transport transport : getTransportList()) {
 //            transport.setDriverForTransport(driverQueue);

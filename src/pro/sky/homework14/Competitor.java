@@ -3,6 +3,7 @@ package pro.sky.homework14;
 import pro.sky.homework14.driver.Driver;
 import pro.sky.homework14.mechanic.Mechanic;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 
 public interface Competitor {
@@ -12,11 +13,13 @@ public interface Competitor {
 
     void maxSpeed();
 
-    boolean setDriverForTransport(LinkedList<Driver> driver);
+    boolean setDriverForTransport();
 
     boolean carryOutMaintenance();
 
     boolean fixTheTransport();
+
+
 
 }
 

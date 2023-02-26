@@ -4,14 +4,11 @@ import pro.sky.homework14.driver.Driver;
 import pro.sky.homework14.driver.TruckDriver;
 import pro.sky.homework14.mechanic.Mechanic;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import static pro.sky.homework14.driver.ServiceDriver.getDriversHashSet;
+import static pro.sky.homework14.mechanic.Mechanic.getMechanicSet;
 
 
 public class Truck extends Transport<TruckDriver> {
-    private static final int COUNT_MECHANIC_SERVICE = 3;
-    private final List<Mechanic> serviceTeam = new ArrayList<>(COUNT_MECHANIC_SERVICE);
     private LoadCapacity loadCapacity;
 
     public Truck(String mark, String model, double engineVolume, LoadCapacity loadCapacity) {
@@ -123,57 +120,77 @@ public class Truck extends Transport<TruckDriver> {
     }
 
     @Override
-    public void createServiceTeam(LinkedList<Mechanic> mechanicList) {
-        if (serviceTeam.isEmpty()) {
-            for (Mechanic mechanic : mechanicList) {
-                if (mechanic.isFree() && mechanic.iCanServiceThisCar(Truck.this) && serviceTeam.size()<COUNT_MECHANIC_SERVICE) {
+    public void createServiceTeam() {
+        if (getTransportMap().get(this) != null) {
+            System.out.println("Mechanic " + getMark() + " " + getModel() + " " + getTransportMap().get(this));
+            return;
+        } else {
+            for (Mechanic mechanic : getMechanicSet()) {
+                if (mechanic.isFree() && mechanic.iCanServiceThisCar(Truck.this)) {
+                    getTransportMap().put(this, mechanic);
                     mechanic.setFree(false);
-                    serviceTeam.add(mechanic);
+                    System.out.println("New mechanic " + getMark() + " " + getModel() + " " + getTransportMap().get(this));
+                    return;
                 }
             }
         }
-        if (serviceTeam.size() == COUNT_MECHANIC_SERVICE ) {
-            System.out.println("Truck " + getMark()+ " "+getModel()+" service team ready " + serviceTeam);
-        } else {
-            System.out.println("Truck service team not ready.");
-        }
+        System.out.println("Service team not ready.");
+//        if (serviceTeam.isEmpty()) {
+//            for (Mechanic mechanic : mechanicList) {
+//                if (mechanic.isFree() && mechanic.iCanServiceThisCar(Truck.this) && serviceTeam.size()<COUNT_MECHANIC_SERVICE) {
+//                    mechanic.setFree(false);
+//                    serviceTeam.add(mechanic);
+//                }
+//            }
+//        }
+//        if (serviceTeam.size() == COUNT_MECHANIC_SERVICE ) {
+//            System.out.println("Truck " + getMark()+ " "+getModel()+" service team ready " + serviceTeam);
+//        } else {
+//            System.out.println("Truck service team not ready.");
+//        }
 
     }
 
 
     @Override
-    public boolean setDriverForTransport(LinkedList<Driver> driver) {
-        for (int i = 0; i < driver.size(); i++) {
-            if(driver.get(i).isFree() && driver.get(i).getTypeLicense().equals(Driver.TypeLicense.C)){
-                setDriver(driver.get(i));
-                driver.get(i).setFree(false);
-                return true;
+    public boolean setDriverForTransport() {
+        if (this.getDriver() != null) {
+            System.out.println("Driver: " + getDriver());
+            return false;
+        } else {
+            for (Driver driver1 : getDriversHashSet()) {
+                if (driver1.isFree() && driver1.getTypeLicense().equals(Driver.TypeLicense.C)) {
+                    setDriver(driver1);
+                    driver1.setFree(false);
+                    return true;
+                }
             }
         }
+        System.out.println("No driver fo " + getMark() + " car");
         return false;
     }
 
     @Override
     public boolean carryOutMaintenance() {
-        if(serviceTeam.isEmpty() || serviceTeam.size()!=COUNT_MECHANIC_SERVICE){
-            System.out.println("No team for carry out maintenance.");
-            return false;
-        } else {
-            System.out.println("Truck " + getMark() + " to get carry out maintenance");
-            return true;
-        }
+//        if(serviceTeam.isEmpty() || serviceTeam.size()!=COUNT_MECHANIC_SERVICE){
+//            System.out.println("No team for carry out maintenance.");
+//            return false;
+//        } else {
+//            System.out.println("Truck " + getMark() + " to get carry out maintenance");
+        return true;
+//        }
 
     }
 
     @Override
     public boolean fixTheTransport() {
-        if(serviceTeam.isEmpty() || serviceTeam.size()!=COUNT_MECHANIC_SERVICE){
-            System.out.println("No team for fix the " + getMark() + " .");
-            return false;
-        } else {
-            System.out.println("Finish fix the truck " + getMark());
-            return true;
-        }
+//        if(serviceTeam.isEmpty() || serviceTeam.size()!=COUNT_MECHANIC_SERVICE){
+//            System.out.println("No team for fix the " + getMark() + " .");
+//            return false;
+//        } else {
+//            System.out.println("Finish fix the truck " + getMark());
+        return true;
+//        }
     }
 
 }
